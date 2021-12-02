@@ -17,6 +17,7 @@ namespace PrimerProyecto
 {
     public class MainWindow : Window
     {
+        public Scene sceneTest;
         private Game game;
         private Stage stage;
         private Script script;
@@ -104,14 +105,11 @@ namespace PrimerProyecto
 
             //Prueba 
             Action actionTest = new Action();
+            sceneTest = new Scene();
             // actionTest.Add("stage", stage);
             // actionTest.Add("cubo", cuboTrucho);
             // actionTest.Add("cara2", cuboTrucho.ListOfFaces["cara2"]);
 
-            foreach (var item in actionTest.ListOfElements)
-            {
-                Console.WriteLine(item);
-            }
 
             //Fin de prueba
             updateFaceItems();
@@ -175,6 +173,7 @@ namespace PrimerProyecto
             //
             // script = Script.LoadFile("../../../Scripts/Cono.json");
             // script.Start();
+
 
             game.Run(200);
             Dispatcher.UIThread.InvokeAsync(() => { Close(); });
@@ -362,6 +361,7 @@ namespace PrimerProyecto
                     if (faceString == "Objeto")
                     {
 
+                        sceneTest.AddAction(new Action().Add(objectString,objectToProcess.Transformations));
                         // objectToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value, (float)ZSlider.Value);
                         return;
                     }
