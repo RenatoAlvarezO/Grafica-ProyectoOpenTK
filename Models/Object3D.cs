@@ -31,6 +31,8 @@ namespace PrimerProyecto
         {
             Matrix4 CenterMatrix = Matrix4.CreateTranslation(newCenter);
             Transformations.Center = CenterMatrix;
+
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
             {
                 face.Value.Transformations.Center = CenterMatrix;
@@ -68,11 +70,17 @@ namespace PrimerProyecto
 
         public void SetRotation(float angleX, float angleY, float angleZ)
         {
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
             {
                 var formerCenter = face.Value.Transformations.Center.Inverted();
                 face.Value.Transformations.TransformationMatrix *= formerCenter;
                 face.Value.SetRotation(angleX, angleY, angleZ, true);
+                if (!isLoaded)
+                {
+                    Transformations.Rotation = face.Value.Transformations.Rotation;
+                    isLoaded = true;
+                }
             }
         }
 
@@ -90,14 +98,34 @@ namespace PrimerProyecto
 
         public void SetTraslation(float x, float y, float z)
         {
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
+            {
                 face.Value.SetTraslation(x, y, z);
+                face.Value.Transformations.SetTransformation();
+
+                if (!isLoaded)
+                {
+                    Transformations.Traslation = face.Value.Transformations.Traslation;
+                    isLoaded = true;
+                }
+            }
         }
 
         public void SetTraslation(Vertex position)
         {
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
+            {
                 face.Value.SetTraslation(position);
+                face.Value.Transformations.SetTransformation();
+
+                if (!isLoaded)
+                {
+                    Transformations.Traslation = face.Value.Transformations.Traslation;
+                    isLoaded = true;
+                }
+            }
         }
 
         public void Scale(float x, float y, float z)
@@ -108,20 +136,49 @@ namespace PrimerProyecto
 
         public void Scale(Vertex position)
         {
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
+            {
                 face.Value.Scale(position);
+                Transformations.SetScaleTransformation();
+                if (!isLoaded)
+                {
+                    Transformations.Scaling = face.Value.Transformations.Scaling;
+                    isLoaded = true;
+                }
+            }
         }
 
         public void SetScale(float x, float y, float z)
         {
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
+            {
                 face.Value.SetScale(x, y, z);
+                Transformations.SetScaleTransformation();
+
+                if (!isLoaded)
+                {
+                    Transformations.Scaling = face.Value.Transformations.Scaling;
+                    isLoaded = true;
+                }
+
+            }
         }
 
         public void SetScale(Vertex position)
         {
+            bool isLoaded = false;
             foreach (var face in ListOfFaces)
+            {
+
                 face.Value.SetScale(position);
+                if (!isLoaded)
+                {
+                    Transformations.Traslation = face.Value.Transformations.Traslation;
+                    isLoaded = true;
+                }
+            }
         }
 
 

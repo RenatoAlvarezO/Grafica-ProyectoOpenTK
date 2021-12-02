@@ -27,6 +27,11 @@ namespace PrimerProyecto
 
         public void Add(string key, Transformation element)
         {
+            if (ListOfElements.ContainsKey(key))
+            {
+                ListOfElements[key] = element;
+                return;
+            }
             ListOfElements.Add(key, element);
         }
 

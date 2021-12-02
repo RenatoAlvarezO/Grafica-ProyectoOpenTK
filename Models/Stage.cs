@@ -65,9 +65,16 @@ namespace PrimerProyecto
 
         public void SetRotation(float angleX, float angleY, float angleZ)
         {
+            bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
             {
                 object3D.Value.SetRotation(angleX, angleY, angleZ);
+                Transformations.SetTransformation();
+                if (!isLoaded)
+                {
+                    Transformations.Rotation = object3D.Value.Transformations.Rotation;
+                    isLoaded = true;
+                }
             }
         }
 
@@ -85,14 +92,34 @@ namespace PrimerProyecto
 
         public void SetTraslation(float x, float y, float z)
         {
+            bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
+            {
                 object3D.Value.SetTraslation(x, y, z);
+                object3D.Value.Transformations.SetTransformation();
+
+                if (!isLoaded)
+                {
+                    Transformations.Traslation = object3D.Value.Transformations.Traslation;
+                    isLoaded = true;
+                }
+            }
         }
 
         public void SetTraslation(Vertex position)
         {
+            bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
+            {
                 object3D.Value.SetTraslation(position);
+                object3D.Value.Transformations.SetTransformation();
+
+                if (!isLoaded)
+                {
+                    Transformations.Traslation = object3D.Value.Transformations.Traslation;
+                    isLoaded = true;
+                }
+            }
         }
 
         public void Scale(float x, float y, float z)
@@ -109,14 +136,33 @@ namespace PrimerProyecto
 
         public void SetScale(float x, float y, float z)
         {
+            bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
+            {
                 object3D.Value.SetScale(x, y, z);
-        }
+                Transformations.SetScaleTransformation();
 
+                if (!isLoaded)
+                {
+                    Transformations.Scaling = object3D.Value.Transformations.Scaling;
+                    isLoaded = true;
+                }
+            }
+        }
         public void SetScale(Vertex position)
         {
+            bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
+            {
                 object3D.Value.SetScale(position);
+                Transformations.SetScaleTransformation();
+
+                if (!isLoaded)
+                {
+                    Transformations.Scaling = object3D.Value.Transformations.Scaling;
+                    isLoaded = true;
+                }
+            }
         }
 
         public void Add(string key, Object3D object3D)

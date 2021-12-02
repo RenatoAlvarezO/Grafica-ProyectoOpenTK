@@ -18,6 +18,8 @@ namespace PrimerProyecto
     public class MainWindow : Window
     {
         public Scene sceneTest;
+
+        public Action action;
         private Game game;
         private Stage stage;
         private Script script;
@@ -104,7 +106,7 @@ namespace PrimerProyecto
             modeComboBox.SelectedIndex = 0;
 
             //Prueba 
-            Action actionTest = new Action();
+            action = new Action();
             sceneTest = new Scene();
             // actionTest.Add("stage", stage);
             // actionTest.Add("cubo", cuboTrucho);
@@ -344,88 +346,26 @@ namespace PrimerProyecto
 
         private void applyAction(object? sender, RoutedEventArgs e)
         {
-
-            string mode = (string)modeComboBox.SelectedItem;
             string objectString = (string)objectComboBox.SelectedItem;
             string faceString = (string)faceComboBox.SelectedItem;
 
-            if (mode == "Rotación")
+            if (objectString == "Escenario")
             {
-                if (objectString == "Escenario")
-                {
-                    game.stage.SetRotation((float)XSlider.Value, (float)YSlider.Value, (float)ZSlider.Value);
-                }
-                else
-                {
-                    Object3D objectToProcess = game.stage.GetObject3D(objectString);
-                    if (faceString == "Objeto")
-                    {
-
-                        sceneTest.AddAction(new Action().Add(objectString,objectToProcess.Transformations));
-                        // objectToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value, (float)ZSlider.Value);
-                        return;
-                    }
-
-                    Face faceToProcess = objectToProcess.GetFace(faceString);
-                    faceToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value, (float)ZSlider.Value, false);
-                }
-
+                action.Add("stage", game.stage.Transformations);
+                Console.WriteLine(action);
+                return;
+            }
+            if (faceString == "Objeto")
+            {
+                Object3D objectToAdd = game.stage.GetObject3D(objectString);
+                action.Add(objectString, objectToAdd.Transformations);
+                Console.WriteLine(action);
                 return;
             }
 
-            Vertex coordinates = new Vertex((float)XSlider.Value, (float)YSlider.Value, (float)ZSlider.Value);
-
-            if (mode == "Traslación")
-            {
-                if (objectString == "Escenario")
-                {
-                    game.stage.SetTraslation(coordinates);
-                }
-                else
-                {
-                    Object3D objectToProcess = game.stage.GetObject3D(objectString);
-                    if (faceString == "Objeto")
-                    {
-                        objectToProcess.SetTraslation(coordinates);
-                        return;
-                    }
-
-                    Face faceToProcess = objectToProcess.GetFace(faceString);
-                    faceToProcess.SetTraslation(coordinates);
-                }
-
-                return;
-            }
-
-            if (mode == "Escalado")
-            {
-                if (objectString == "Escenario")
-                {
-                    game.stage.SetScale(coordinates);
-                }
-                else
-                {
-                    Object3D objectToProcess = game.stage.GetObject3D(objectString);
-                    if (faceString == "Objeto")
-                    {
-                        objectToProcess.SetScale(coordinates);
-                        return;
-                    }
-
-                    Face faceToProcess = objectToProcess.GetFace(faceString);
-                    faceToProcess.SetScale(coordinates);
-                }
-            }
-
-            // Object3D objectToAction = game.stage.GetObject3D("cubo");
-            // Action action = new Action(objectToAction);
-
-
-            // Action action = new(game.stage.GetObject3D("cubo").GetFace("60"));
-            // action.yRotation = 10;
-
-
-            // action.Apply();
+            Face faceToAdd = game.stage.GetObject3D(objectString).ListOfFaces[faceString];
+            action.Add(faceString, faceToAdd.Transformations);
+            Console.WriteLine(action);
         }
     }
 }
