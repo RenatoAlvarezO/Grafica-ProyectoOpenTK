@@ -13,33 +13,33 @@ namespace PrimerProyecto
     {
         public Dictionary<string, Face> ListOfFaces { get; set; }
 
-        public Vertex Center { get; set; }
 
-
+        public Transformation Transformations { get; set; }
         public Object3D(Dictionary<string, Face> listOfFaces, Vertex center)
         {
             ListOfFaces = listOfFaces;
-            Center = center;
+            Transformations = new Transformation(center);
         }
 
         public Object3D()
         {
             ListOfFaces = new Dictionary<string, Face>();
-            Center = Vertex.Origin;
+            Transformations = new();
         }
 
         public void SetCenter(Vertex newCenter)
         {
-            Center = newCenter;
+            Matrix4 CenterMatrix = Matrix4.CreateTranslation(newCenter);
+            Transformations.Center = CenterMatrix;
             foreach (var face in ListOfFaces)
             {
-                face.Value.Center = newCenter;
+                face.Value.Transformations.Center = CenterMatrix;
             }
         }
 
-        public Vertex GetCenter()
+        public Matrix4 GetCenter()
         {
-            return Center;
+            return Transformations.Center;
         }
 
         public Face GetFace(string key)
@@ -62,7 +62,6 @@ namespace PrimerProyecto
         {
             foreach (var face in ListOfFaces)
             {
-                Vertex faceCenter = face.Value.Center;
                 face.Value.Rotate(angleX, angleY, angleZ);
             }
         }
@@ -226,8 +225,9 @@ namespace PrimerProyecto
                 }
 
                 ListOfFaces = faces;
-                Center = center;
-                SetCenter(Center);
+                Matrix4 centerMatrix = Matrix4.CreateTranslation(center);
+                Transformations.Center = centerMatrix;
+                SetCenter(center);
             }
         }
 
@@ -250,6 +250,7 @@ class MatrixConverter : JsonConverter<Matrix4>
     public override Matrix4 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         Dictionary<string, float> jsonDecoded = new Dictionary<string, float>();
+
         if (reader.TokenType != JsonTokenType.StartObject)
             throw new JsonException();
 

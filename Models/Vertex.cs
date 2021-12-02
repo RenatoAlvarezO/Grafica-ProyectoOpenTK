@@ -66,5 +66,10 @@ namespace PrimerProyecto
         {
             return new Vector3(convert.X, convert.Y, convert.Z);
         }
+
+        public static Vertex Vector4ToVertex(Vector4 vector4)
+        {
+            return new Vertex(vector4.X, vector4.Y, vector4.Z);
+        }
     }
 }

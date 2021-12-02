@@ -9,38 +9,34 @@ namespace PrimerProyecto
     {
         private Dictionary<string, Object3D> ListOfObject3Ds;
 
-        public Vertex Center;
 
-        public Matrix4 Rotation { get; set; }
-
-        public Matrix4 Scaling { get; set; }
+        public Transformation Transformations { get; set; }
 
         public Stage(Dictionary<string, Object3D> ListOfObject3Ds, Vertex center)
         {
             this.ListOfObject3Ds = ListOfObject3Ds;
-            Center = center;
-            SetCenter(Center);
+            Transformations = new(center);
+            SetCenter(center);
         }
 
         public Stage(Vertex center)
         {
             ListOfObject3Ds = new Dictionary<string, Object3D>();
-            Center = center;
+            Transformations = new(center);
         }
 
         public void SetCenter(Vertex center)
         {
-            Center = center;
             foreach (var object3D in ListOfObject3Ds)
             {
-                Vertex formerCenter = object3D.Value.GetCenter();
-                object3D.Value.SetCenter(Center + formerCenter);
+                Vertex formerCenter = Vertex.Vector4ToVertex(object3D.Value.GetCenter().Row3);
+                object3D.Value.SetCenter(center + formerCenter);
             }
         }
 
-        public Vertex GetCenter()
+        public Matrix4 GetCenter()
         {
-            return Center;
+            return Transformations.Center;
         }
 
         public Dictionary<string, Object3D> GetObjects()

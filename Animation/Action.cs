@@ -7,30 +7,30 @@ namespace PrimerProyecto
 {
     public class Action
     {
-        public Dictionary<string, Matrix4> ListOfElements;
+        public Dictionary<string, Transformation> ListOfElements;
         public DateTimeOffset StartTime;
         public DateTimeOffset Duration;
 
         public Action()
         {
-            ListOfElements = new Dictionary<string, Matrix4>();
+            ListOfElements = new Dictionary<string, Transformation>();
             StartTime = new DateTimeOffset();
             Duration = new DateTimeOffset();
         }
 
         public Action(DateTimeOffset startTime, DateTimeOffset duration)
         {
-            ListOfElements = new Dictionary<string, Matrix4>();
+            ListOfElements = new Dictionary<string, Transformation>();
             StartTime = startTime;
             Duration = duration;
         }
 
-        public void Add(string key, Matrix4 element)
+        public void Add(string key, Transformation element)
         {
             ListOfElements.Add(key, element);
         }
 
-        public void Transform(string key, Matrix4 transformation)
+        public void Transform(string key, Transformation transformation)
         {
             ListOfElements.Add(key, transformation);
         }
