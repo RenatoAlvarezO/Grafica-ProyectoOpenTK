@@ -130,6 +130,14 @@ namespace PrimerProyecto
             }
         }
 
+        public void SetTransformations()
+        {
+            foreach (var face in ListOfFaces)
+            {
+                face.Value.Transformations.TransformationMatrix = Transformations.TransformationMatrix;
+                face.Value.SetTransformation();
+            }
+        }
         public void Scale(float x, float y, float z)
         {
             foreach (var face in ListOfFaces)

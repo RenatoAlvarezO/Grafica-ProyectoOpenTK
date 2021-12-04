@@ -32,7 +32,7 @@ namespace PrimerProyecto
             Color backgroundColor = Color.FromArgb(255, 65, 87, 63);
             GL.ClearColor(backgroundColor);
 
-            int orthoSize = 10;
+            int orthoSize = 20;
             GL.Ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, -orthoSize, orthoSize);
             //           GL.Rotate(45, 1, 1, 0); 
             base.OnLoad(e);

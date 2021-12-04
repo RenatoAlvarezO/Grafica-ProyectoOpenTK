@@ -129,6 +129,10 @@ namespace PrimerProyecto
             Transformations.SetTransformation();
         }
 
+        public void SetTransformation()
+        {
+            Transformations.SetTransformation();
+        }
         public Matrix4 GetTransformationMatrix()
         {
             return Transformations.TransformationMatrix;

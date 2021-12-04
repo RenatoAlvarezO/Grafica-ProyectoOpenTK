@@ -30,12 +30,20 @@
             <Slider Name="YSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler" />
             <TextBlock HorizontalAlignment="Left" Text="Z:" Margin="0,0,20,0" />
             <Slider Name="ZSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler" />
-            <Button Name="ActionBtn" Click="applyAction"> Agregar Acción</Button>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
             <TextBlock HorizontalAlignment="Center" Text="Fotogramas: " />
             <TextBlock HorizontalAlignment="Center" Name="Fotogramas" Text=" " />
+            <TextBlock HorizontalAlignment="Center" Text=";" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Name="ActionBtn" Click="applyAction"> Agregar a Acción</Button>
+            <Button Name="SceneBtn" Click="addAction"> Agregar a Escena</Button>
+        </StackPanel>
+        <StackPanel>
+            <Button Name="PlayBtn" Click="playAnimation">Darle Play</Button>            
         </StackPanel>
     </StackPanel>
 </Window>

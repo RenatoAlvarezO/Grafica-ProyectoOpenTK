@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 
 namespace PrimerProyecto
@@ -26,68 +25,22 @@ namespace PrimerProyecto
         public Script(List<Scene> listOfScenes, int fps)
         {
             ListOfScenes = listOfScenes;
-            FPS = fps;
-            // ScriptThread = new(AnimationHanlder);
-            // ScriptTimer.
         }
 
         public Script(List<Scene> listOfScenes)
         {
             ListOfScenes = listOfScenes;
-            FPS = 30;
-            // ScriptThread = new(AnimationHanlder);
-        }
-
-        public Script()
-        {
-            ListOfScenes = new List<Scene>();
-            FPS = 30;
-            // ScriptThread = new(AnimationHanlder);
-        }
-
-        private void AnimationHanlder(object? state)
-        {
-            ListOfScenes[counter].ExecuteNextAction();
-            counter++;
         }
 
         public Script(int fps)
         {
             ListOfScenes = new List<Scene>();
             FPS = fps;
-            // ScriptThread = new(AnimationHanlder);
-            // ScriptTimer.
         }
 
         public void AddScene(Scene newScene)
         {
             ListOfScenes.Add(newScene);
-        }
-
-        public void Start()
-        {
-            ScriptTimer = new Timer(AnimationHanlder, new AutoResetEvent(true), FPS, FPS); //1000 / (FPS * 1000)
-
-            // ScriptThread.Start();
-            IsPlaying = true;
-        }
-
-        public void Stop()
-        {
-            ScriptThread.Abort();
-            IsPlaying = false;
-        }
-
-        private void AnimationHanlder()
-        {
-            DateTimeOffset lastTime = DateTime.UtcNow;
-            int counter = 0;
-            while (IsPlaying)
-            {
-                counter++;
-                // if ((DateTimeOffset.Now - lastTime).TotalMilliseconds > 1000d)
-                // Console.WriteLine(counter.ToString());
-            }
         }
 
         public void SaveFile(string path)

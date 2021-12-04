@@ -68,7 +68,7 @@ namespace PrimerProyecto
             bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
             {
-                
+
                 object3D.Value.SetRotation(angleX, angleY, angleZ, false);
                 if (!isLoaded)
                 {
@@ -171,6 +171,14 @@ namespace PrimerProyecto
             ListOfObject3Ds.Add(key, object3D);
         }
 
+        public void ApplyTransformations()
+        {
+            foreach (var object3D in ListOfObject3Ds)
+            {
+                object3D.Value.Transformations.TransformationMatrix = Transformations.TransformationMatrix;
+                object3D.Value.Transformations.SetTransformation();
+            }
+        }
         public void Delete(string key)
         {
             ListOfObject3Ds.Remove(key);

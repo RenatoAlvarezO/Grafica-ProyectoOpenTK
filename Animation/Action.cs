@@ -11,6 +11,7 @@ namespace PrimerProyecto
         public DateTimeOffset StartTime;
         public DateTimeOffset Duration;
 
+        public Stage stage;
         public Action()
         {
             ListOfElements = new Dictionary<string, Transformation>();
@@ -23,6 +24,11 @@ namespace PrimerProyecto
             ListOfElements = new Dictionary<string, Transformation>();
             StartTime = startTime;
             Duration = duration;
+        }
+
+        public void SetStage(Stage newStage)
+        {
+            stage = newStage;
         }
 
         public void Add(string key, Transformation element)
@@ -49,6 +55,5 @@ namespace PrimerProyecto
         {
             Duration = duration;
         }
-        public void Apply() { }
     }
 }

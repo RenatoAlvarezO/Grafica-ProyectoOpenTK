@@ -32,19 +32,5 @@ namespace PrimerProyecto
             ListOfActions.Insert(index, newAction);
         }
 
-        public int ExecuteAction(int actionIndex)
-        {
-            ListOfActions[actionIndex].Apply();
-            lastIndex = actionIndex;
-            return actionIndex;
-        }
-
-        public int ExecuteNextAction()
-        {
-            int nextIndex = (lastIndex + 1) > ListOfActions.Count - 1 ? 0 : lastIndex + 1;
-            ListOfActions[nextIndex].Apply();
-            lastIndex = nextIndex;
-            return nextIndex;
-        }
     }
 }
