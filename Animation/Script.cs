@@ -9,7 +9,7 @@ namespace PrimerProyecto
 {
     public class Script
     {
-        public Dictionary<string, Scene> ListOfScenes { get; set; }
+        public List<Scene> ListOfScenes { get; set; }
 
         public string currentScene { get; set; }
 
@@ -23,7 +23,7 @@ namespace PrimerProyecto
 
         public int counter;
 
-        public Script(Dictionary<string, Scene> listOfScenes, int fps)
+        public Script(List<Scene> listOfScenes, int fps)
         {
             ListOfScenes = listOfScenes;
             FPS = fps;
@@ -31,7 +31,7 @@ namespace PrimerProyecto
             // ScriptTimer.
         }
 
-        public Script(Dictionary<string, Scene> listOfScenes)
+        public Script(List<Scene> listOfScenes)
         {
             ListOfScenes = listOfScenes;
             FPS = 30;
@@ -40,19 +40,19 @@ namespace PrimerProyecto
 
         public Script()
         {
-            ListOfScenes = new Dictionary<string, Scene>();
+            ListOfScenes = new List<Scene>();
             FPS = 30;
             // ScriptThread = new(AnimationHanlder);
         }
 
         private void AnimationHanlder(object? state)
         {
-            ListOfScenes[currentScene].ExecuteNextAction();
+            ListOfScenes[counter].ExecuteNextAction();
         }
 
         public Script(int fps)
         {
-            ListOfScenes = new Dictionary<string, Scene>();
+            ListOfScenes = new List<Scene>();
             FPS = fps;
             // ScriptThread = new(AnimationHanlder);
             // ScriptTimer.
@@ -113,6 +113,11 @@ namespace PrimerProyecto
             };
             string outputString = File.ReadAllText(path);
             return JsonSerializer.Deserialize<Script>(outputString,options);
+        }
+
+        internal void AddScene(Scene scene)
+        {
+            throw new NotImplementedException();
         }
     }
 }

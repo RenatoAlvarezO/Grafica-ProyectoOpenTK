@@ -17,8 +17,7 @@ namespace PrimerProyecto
 {
     public class MainWindow : Window
     {
-        public Scene sceneTest;
-
+        public Scene scene;
         public Action action;
         private Game game;
         private Stage stage;
@@ -65,7 +64,7 @@ namespace PrimerProyecto
 
             stage = new Stage(new Vertex(0f, 0f, 0f));
 
-            Object3D cuboTrucho = new Object3D();
+            // Object3D cuboTrucho = new Object3D();
             // cuboTrucho.SetCenter(Vertex.Origin);
             Dictionary<string, Vertex> vertices = new Dictionary<string, Vertex>();
 
@@ -77,7 +76,7 @@ namespace PrimerProyecto
             vertices.Add("vert3", new Vertex(2, -2, 0));
             vertices.Add("vert4", new Vertex(-2, -2, 0));
 
-            cuboTrucho.Add("cara1", new Face(vertices, System.Drawing.Color.Red.ToArgb(), Vertex.Origin));
+            // cuboTrucho.Add("cara1", new Face(vertices, System.Drawing.Color.Red.ToArgb(), Vertex.Origin));
 
             Dictionary<string, Vertex> vertices2 = new Dictionary<string, Vertex>();
 
@@ -86,7 +85,7 @@ namespace PrimerProyecto
             vertices2.Add("vert3", new Vertex(2, 0, -2));
             vertices2.Add("vert4", new Vertex(-2, 0, -2));
 
-            cuboTrucho.Add("cara2", new Face(vertices2, System.Drawing.Color.Aqua.ToArgb(), new Vertex(0f, 2f, -2f)));
+            // cuboTrucho.Add("cara2", new Face(vertices2, System.Drawing.Color.Aqua.ToArgb(), new Vertex(0f, 2f, -2f)));
 
 
             // stage.Add("cubo", ObjLoader.loadObj("../../../Models/object/Casa.obj", Vertex.Origin));
@@ -94,19 +93,28 @@ namespace PrimerProyecto
             // stage.Add("cono", ObjLoader.loadObj("../../../Models/object/Cono.json", Vertex.Origin));
 
 
-            stage.Add("Cabeza", ObjLoader.loadObj("Models/object/Hormiga/Cabeza.obj", Vertex.Origin));
-            // stage.Add("Cabeza", ObjLoader.loadObj("Models/object/Hormiga/Cabeza.obj", new Vertex(2,0,0)));
+            //  Hormiga
+            stage.Add("Cabezario", ObjLoader.loadObj("Models/object/Hormiga/Cabeza.obj", new Vertex(2, 0, 0)));
+            stage.Add("Torax", ObjLoader.loadObj("Models/object/Hormiga/Torax.obj", Vertex.Origin));
+            stage.Add("Cola", ObjLoader.loadObj("Models/object/Hormiga/Cola.obj", new Vertex(-2, 0, 0)));
+            stage.Add("Pata1", ObjLoader.loadObj("Models/object/Hormiga/Pata.obj", Vertex.Origin));
 
+            //  Libro
+            // stage.Add("Tapa1", ObjLoader.loadObj("Models/object/Libro/Tapa.obj",Vertex.Origin, System.Drawing.Color.Aqua));
+            // stage.Add("Hoja1", ObjLoader.loadObj("Models/object/Libro/Hoja.obj",new Vertex(0,0.1f,0),System.Drawing.Color.Beige));
+            // stage.Add("Hoja2", ObjLoader.loadObj("Models/object/Libro/Hoja.obj",new Vertex(0,0.2f,0),System.Drawing.Color.Beige));
+            // stage.Add("Hoja3", ObjLoader.loadObj("Models/object/Libro/Hoja.obj",new Vertex(0,0.3f,0),System.Drawing.Color.Beige));
+            // stage.Add("Tapa2", ObjLoader.loadObj("Models/object/Libro/Tapa.obj",new Vertex(1.5f,0f,0f), System.Drawing.Color.Aqua));
+            // stage.Add("Hoja4", ObjLoader.loadObj("Models/object/Libro/Hoja.obj",new Vertex(1.5f,0.1f,0),System.Drawing.Color.Beige));
+            // stage.Add("Hoja5", ObjLoader.loadObj("Models/object/Libro/Hoja.obj",new Vertex(1.5f,0.2f,0),System.Drawing.Color.Beige));
+            // stage.Add("Hoja6", ObjLoader.loadObj("Models/object/Libro/Hoja.obj",new Vertex(1.5f,0.3f,0),System.Drawing.Color.Beige));
 
-            // stage.Add("Torax", ObjLoader.loadObj("Models/object/Hormiga/Torax.obj",Vertex.Origin));
-            // stage.Add("Cola", ObjLoader.loadObj("Models/object/Hormiga/Cola.obj", new Vertex(-2,0,0)));
-
-            cuboTrucho.SaveFile("Models/object/cubotrucho.json");
+            // cuboTrucho.SaveFile("Models/object/cubotrucho.json");
 
             // stage.Add("cubo", Object3D.LoadFromJson("Models/object/Casa.json"));
             // stage.Add("techo", Object3D.LoadFromJson("Models/object/Techo.json"));
             // stage.Add("cono", Object3D.LoadFromJson("Models/object/Cono.json"));
-            stage.Add("cubo Trucho", Object3D.LoadFromJson("Models/object/cubotrucho.json"));
+            // stage.Add("cubo Trucho", Object3D.LoadFromJson("Models/object/cubotrucho.json"));
 
 
             objectComboBox.Items = stage.GetObjects().Keys.Prepend("Escenario");
@@ -117,7 +125,12 @@ namespace PrimerProyecto
 
             //Prueba 
             action = new Action();
-            sceneTest = new Scene();
+            scene = new Scene();
+            scene.AddAction(action);
+            
+            script = new Script(50);
+            script.AddScene(scene);
+
             // actionTest.Add("stage", stage);
             // actionTest.Add("cubo", cuboTrucho);
             // actionTest.Add("cara2", cuboTrucho.ListOfFaces["cara2"]);
@@ -151,10 +164,6 @@ namespace PrimerProyecto
             game.stage = stage;
 
             game.UpdateFrame += onUpdateFrameHandler;
-
-            script = new Script(50);
-
-            Scene scene = new Scene();
 
 
             // for (int i = 0; i < 10; i++)
