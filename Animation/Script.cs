@@ -48,6 +48,7 @@ namespace PrimerProyecto
         private void AnimationHanlder(object? state)
         {
             ListOfScenes[counter].ExecuteNextAction();
+            counter++;
         }
 
         public Script(int fps)
@@ -58,9 +59,9 @@ namespace PrimerProyecto
             // ScriptTimer.
         }
 
-        public void AddScene(string key, Scene newScene)
+        public void AddScene(Scene newScene)
         {
-            ListOfScenes.Add(key, newScene);
+            ListOfScenes.Add(newScene);
         }
 
         public void Start()
@@ -85,7 +86,7 @@ namespace PrimerProyecto
             {
                 counter++;
                 // if ((DateTimeOffset.Now - lastTime).TotalMilliseconds > 1000d)
-                    // Console.WriteLine(counter.ToString());
+                // Console.WriteLine(counter.ToString());
             }
         }
 
@@ -95,7 +96,7 @@ namespace PrimerProyecto
             {
                 WriteIndented = true,
                 MaxDepth = 500000,
-                Converters = {new ActorJSONConverter()}
+                Converters = { new ActorJSONConverter() }
             };
 
             string jsonOutput = JsonSerializer.Serialize(this, options);
@@ -109,15 +110,10 @@ namespace PrimerProyecto
             {
                 WriteIndented = true,
                 MaxDepth = 500000,
-                Converters = {new ActorJSONConverter()}
+                Converters = { new ActorJSONConverter() }
             };
             string outputString = File.ReadAllText(path);
-            return JsonSerializer.Deserialize<Script>(outputString,options);
-        }
-
-        internal void AddScene(Scene scene)
-        {
-            throw new NotImplementedException();
+            return JsonSerializer.Deserialize<Script>(outputString, options);
         }
     }
 }
