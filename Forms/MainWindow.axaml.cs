@@ -32,6 +32,8 @@ namespace PrimerProyecto
         Slider YSlider;
         Slider ZSlider;
 
+        TextBlock fotogramas;
+
         ToggleSwitch TextureSwitch;
 
         private float minRotate = -180f;
@@ -59,10 +61,12 @@ namespace PrimerProyecto
 
             TextureSwitch = this.Find<ToggleSwitch>("TexutreSwitch");
 
+            fotogramas = this.Find<TextBlock>("Fotogramas");
+
             stage = new Stage(new Vertex(0f, 0f, 0f));
 
             Object3D cuboTrucho = new Object3D();
-            cuboTrucho.SetCenter(Vertex.Origin);
+            // cuboTrucho.SetCenter(Vertex.Origin);
             Dictionary<string, Vertex> vertices = new Dictionary<string, Vertex>();
 
             Matrix4 rotation = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(90));
@@ -90,13 +94,19 @@ namespace PrimerProyecto
             // stage.Add("cono", ObjLoader.loadObj("../../../Models/object/Cono.json", Vertex.Origin));
 
 
+            stage.Add("Cabeza", ObjLoader.loadObj("Models/object/Hormiga/Cabeza.obj", Vertex.Origin));
+            // stage.Add("Cabeza", ObjLoader.loadObj("Models/object/Hormiga/Cabeza.obj", new Vertex(2,0,0)));
+
+
+            // stage.Add("Torax", ObjLoader.loadObj("Models/object/Hormiga/Torax.obj",Vertex.Origin));
+            // stage.Add("Cola", ObjLoader.loadObj("Models/object/Hormiga/Cola.obj", new Vertex(-2,0,0)));
+
             cuboTrucho.SaveFile("Models/object/cubotrucho.json");
 
             // stage.Add("cubo", Object3D.LoadFromJson("Models/object/Casa.json"));
             // stage.Add("techo", Object3D.LoadFromJson("Models/object/Techo.json"));
             // stage.Add("cono", Object3D.LoadFromJson("Models/object/Cono.json"));
             stage.Add("cubo Trucho", Object3D.LoadFromJson("Models/object/cubotrucho.json"));
-
 
 
             objectComboBox.Items = stage.GetObjects().Keys.Prepend("Escenario");
@@ -145,6 +155,7 @@ namespace PrimerProyecto
             script = new Script(50);
 
             Scene scene = new Scene();
+
 
             // for (int i = 0; i < 10; i++)
             // {
@@ -234,7 +245,7 @@ namespace PrimerProyecto
                     if (objectString == "Escenario")
                     {
                         game.stage.SetRotation((float)XSlider.Value, (float)YSlider.Value,
-                                (float)ZSlider.Value);
+                            (float)ZSlider.Value);
                     }
                     else
                     {
@@ -242,20 +253,20 @@ namespace PrimerProyecto
                         if (faceString == "Objeto")
                         {
                             objectToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value,
-                                    (float)ZSlider.Value);
+                                (float)ZSlider.Value);
                             return;
                         }
 
                         Face faceToProcess = objectToProcess.GetFace(faceString);
                         faceToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value,
-                                (float)ZSlider.Value, false);
+                            (float)ZSlider.Value, false);
                     }
 
                     return;
                 }
 
                 Vertex coordinates = new Vertex((float)XSlider.Value, (float)YSlider.Value,
-                        (float)ZSlider.Value);
+                    (float)ZSlider.Value);
 
                 if (mode == "Traslación")
                 {
@@ -352,20 +363,21 @@ namespace PrimerProyecto
             if (objectString == "Escenario")
             {
                 action.Add("stage", game.stage.Transformations);
-                Console.WriteLine(action);
+                fotogramas.Text = action.ListOfElements.Count.ToString();
                 return;
             }
+
             if (faceString == "Objeto")
             {
                 Object3D objectToAdd = game.stage.GetObject3D(objectString);
                 action.Add(objectString, objectToAdd.Transformations);
-                Console.WriteLine(action);
+                fotogramas.Text = action.ListOfElements.Count.ToString();
                 return;
             }
 
             Face faceToAdd = game.stage.GetObject3D(objectString).ListOfFaces[faceString];
             action.Add(faceString, faceToAdd.Transformations);
-            Console.WriteLine(action);
+            fotogramas.Text = action.ListOfElements.Count.ToString();
         }
     }
 }

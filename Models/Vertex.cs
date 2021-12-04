@@ -53,6 +53,7 @@ namespace PrimerProyecto
             a.X * b.M13 + a.Y * b.M23 + a.Z * b.M33 + 1f * b.M43
         );
 
+        public static Vertex operator /(Vertex a, float b) => new(a.X / b, a.Y / b, a.Z / b);
         public static Vertex operator *(Vertex a, float b) => new(b * a.X, b * a.Y, b * a.Z);
 
         public static readonly Vertex Origin = new Vertex();

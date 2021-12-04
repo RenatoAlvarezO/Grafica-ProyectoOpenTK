@@ -25,8 +25,10 @@ namespace PrimerProyecto
             colors.Add(Color.White);
             colors.Add(Color.Blue);
 
+            Object3D objectToReturn = new Object3D();
+            objectToReturn.SetCenter(center);
 
-            Dictionary<string,Face> faces = new Dictionary<string,Face>();
+            Dictionary<string, Face> faces = new Dictionary<string, Face>();
             List<uint> textureIndices = new List<uint>();
             List<uint> normalIndices = new List<uint>();
 
@@ -84,7 +86,7 @@ namespace PrimerProyecto
 
                                 // subtract 1: indices start from 1, not 0
                                 int index = int.Parse(comps[0]) - 1;
-                                faceVertices.Add(key.ToString(),new Vertex(vertices[index].X, vertices[index].Y, vertices[index].Z));
+                                faceVertices.Add(key.ToString(), new Vertex(vertices[index].X, vertices[index].Y, vertices[index].Z));
 
                                 if (comps.Length > 1 && comps[1].Length != 0)
                                     textureIndices.Add(uint.Parse(comps[1]) - 1);
@@ -95,7 +97,7 @@ namespace PrimerProyecto
                                 key++;
                             }
 
-                            faces.Add(faceCounter.ToString(),new Face(faceVertices, colors[faces.Count % colors.Count].ToArgb(), center));
+                            faces.Add(faceCounter.ToString(), new Face(faceVertices, colors[faces.Count % colors.Count].ToArgb(), Vertex.Origin));
 
                             break;
                     }
@@ -103,7 +105,13 @@ namespace PrimerProyecto
                     faceCounter++;
                 }
 
-                return new Object3D(faces, center);
+                foreach (var item in faces)
+                {
+                    objectToReturn.Add(item.Key, item.Value);
+                }
+
+                objectToReturn.SetCenter(center);
+                return objectToReturn;
             }
         }
     }

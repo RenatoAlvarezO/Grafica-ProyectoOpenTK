@@ -36,6 +36,7 @@ namespace PrimerProyecto
             foreach (var face in ListOfFaces)
             {
                 face.Value.Transformations.Center = CenterMatrix;
+                face.Value.Transformations.SetTransformation(true);
             }
         }
 

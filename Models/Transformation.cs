@@ -14,16 +14,18 @@ namespace PrimerProyecto
         {
             Rotation = Matrix4.Identity;
             Scaling = Matrix4.Identity;
-            Traslation = Matrix4.CreateTranslation(Vertex.Origin);
+            Traslation = Matrix4.Identity;
             Center = Matrix4.CreateTranslation(Vertex.Origin);
+            TransformationMatrix = Matrix4.Identity;
         }
 
         public Transformation(Vertex center)
         {
             Rotation = Matrix4.Identity;
             Scaling = Matrix4.Identity;
-            Traslation = Matrix4.CreateTranslation(Vertex.Origin);
+            Traslation = Matrix4.Identity;
             Center = Matrix4.CreateTranslation(center);
+            TransformationMatrix = Matrix4.Identity;
         }
 
         public void SetTransformation(bool self)

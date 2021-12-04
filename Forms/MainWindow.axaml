@@ -10,27 +10,32 @@
             <TextBlock VerticalAlignment="Center" Text="Objetos:" Margin="0,0,20,0" />
             <ComboBox HorizontalAlignment="Center" Name="ObjectComboBox" SelectionChanged="ObjectSelected" />
         </StackPanel>
-        
+
         <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
             <TextBlock VerticalAlignment="Center" Text="Caras:" Margin="0,0,20,0" />
             <ComboBox HorizontalAlignment="Center" Name="FaceComboBox" />
         </StackPanel>
-        
+
         <StackPanel Orientation="Horizontal" Margin="0,20,0,20">
             <TextBlock VerticalAlignment="Center" Text="Acción:" Margin="0,0,20,0" />
             <ComboBox HorizontalAlignment="Center" Name="ModeComboBox" SelectionChanged="ModeSelected" />
         </StackPanel>
-        
-        <ToggleSwitch Name="TexutreSwitch" Content="Textura" Tapped="SwitchHandler"></ToggleSwitch>
-        
+
+        <ToggleSwitch Name="TexutreSwitch" Content="Textura" Tapped="SwitchHandler" />
+
         <StackPanel Margin="0,20,0,0">
             <TextBlock HorizontalAlignment="Left" Text="X:" Margin="0,0,20,0" />
-            <Slider Name="XSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler"></Slider>
+            <Slider Name="XSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler" />
             <TextBlock HorizontalAlignment="Left" Text="Y:" Margin="0,0,20,0" />
-            <Slider Name="YSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler"></Slider>
+            <Slider Name="YSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler" />
             <TextBlock HorizontalAlignment="Left" Text="Z:" Margin="0,0,20,0" />
-            <Slider Name="ZSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler"></Slider>
+            <Slider Name="ZSlider" Minimum="-180" Maximum="180" PropertyChanged="SliderHandler" />
             <Button Name="ActionBtn" Click="applyAction"> Agregar Acción</Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Center" Text="Fotogramas: " />
+            <TextBlock HorizontalAlignment="Center" Name="Fotogramas" Text=" " />
         </StackPanel>
     </StackPanel>
 </Window>

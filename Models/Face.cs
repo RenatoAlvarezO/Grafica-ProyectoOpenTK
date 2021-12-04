@@ -17,7 +17,6 @@ namespace PrimerProyecto
             ListOfVertices = listOfVertices;
             FaceColor = faceColor;
             Center = center;
-
             Transformations = new Transformation(center);
 
             TextureType = 2;
