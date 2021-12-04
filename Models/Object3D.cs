@@ -69,14 +69,14 @@ namespace PrimerProyecto
             }
         }
 
-        public void SetRotation(float angleX, float angleY, float angleZ)
+        public void SetRotation(float angleX, float angleY, float angleZ, bool self)
         {
             bool isLoaded = false;
             foreach (var face in ListOfFaces)
             {
                 var formerCenter = face.Value.Transformations.Center.Inverted();
                 face.Value.Transformations.TransformationMatrix *= formerCenter;
-                face.Value.SetRotation(angleX, angleY, angleZ, true);
+                face.Value.SetRotation(angleX, angleY, angleZ, self);
                 if (!isLoaded)
                 {
                     Transformations.Rotation = face.Value.Transformations.Rotation;
@@ -102,8 +102,9 @@ namespace PrimerProyecto
             bool isLoaded = false;
             foreach (var face in ListOfFaces)
             {
+                var formerCenter = face.Value.Transformations.Center.Inverted();
+                face.Value.Transformations.TransformationMatrix *= formerCenter;
                 face.Value.SetTraslation(x, y, z);
-                face.Value.Transformations.SetTransformation();
 
                 if (!isLoaded)
                 {

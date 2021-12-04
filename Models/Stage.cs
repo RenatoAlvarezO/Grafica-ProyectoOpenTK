@@ -68,8 +68,8 @@ namespace PrimerProyecto
             bool isLoaded = false;
             foreach (var object3D in ListOfObject3Ds)
             {
-                object3D.Value.SetRotation(angleX, angleY, angleZ);
-                Transformations.SetTransformation();
+                
+                object3D.Value.SetRotation(angleX, angleY, angleZ, false);
                 if (!isLoaded)
                 {
                     Transformations.Rotation = object3D.Value.Transformations.Rotation;

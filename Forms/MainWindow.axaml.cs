@@ -253,13 +253,13 @@ namespace PrimerProyecto
                         if (faceString == "Objeto")
                         {
                             objectToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value,
-                                (float)ZSlider.Value);
+                                (float)ZSlider.Value, true);
                             return;
                         }
 
                         Face faceToProcess = objectToProcess.GetFace(faceString);
                         faceToProcess.SetRotation((float)XSlider.Value, (float)YSlider.Value,
-                            (float)ZSlider.Value, false);
+                            (float)ZSlider.Value, true);
                     }
 
                     return;

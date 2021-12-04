@@ -30,7 +30,7 @@ namespace PrimerProyecto
 
         public void SetTransformation(bool self)
         {
-            TransformationMatrix = self ? Center * Traslation * Rotation * Scaling
+            TransformationMatrix = !self ? Center * Traslation * Rotation * Scaling
                         : Rotation * Scaling * Center * Traslation;
         }
 
