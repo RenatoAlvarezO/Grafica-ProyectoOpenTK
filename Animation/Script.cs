@@ -68,5 +68,13 @@ namespace PrimerProyecto
             string outputString = File.ReadAllText(path);
             return JsonSerializer.Deserialize<Script>(outputString, options);
         }
+
+        public void Play()
+        {
+            while (true)
+            {
+
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace PrimerProyecto
 
             int orthoSize = 20;
             GL.Ortho(-orthoSize, orthoSize, -orthoSize, orthoSize, -orthoSize, orthoSize);
-            //           GL.Rotate(45, 1, 1, 0); 
+            // GL.Rotate(45, 1, 1, 0);
             base.OnLoad(e);
         }
 

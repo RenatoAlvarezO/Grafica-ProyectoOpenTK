@@ -6,10 +6,12 @@ namespace PrimerProyecto
 {
     public class Scene
     {
-        public List<Action> ListOfActions{ get; set; }
+        public List<Action> ListOfActions { get; set; }
 
         public int lastIndex { get; set; }
 
+        public DateTimeOffset StartTime;
+        public DateTimeOffset Duration;
         public Scene()
         {
             ListOfActions = new List<Action>();

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
+using OpenTK;
 
 namespace PrimerProyecto
 {
@@ -14,16 +16,11 @@ namespace PrimerProyecto
         public AnimationController(Script script)
         {
 
-            controllerThread = new(controllerHandler);
         }
 
-        public void controllerHandler()
+        public void controllerHandler(object? sender, FrameEventArgs e)
         {
-            List<Scene> listOfScenes = script.ListOfScenes;
-            foreach (var item in listOfScenes)
-            {
-                
-            }
+            Console.WriteLine("En hilo");
         }
     }
 }

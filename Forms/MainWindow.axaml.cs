@@ -25,6 +25,7 @@ namespace PrimerProyecto
         private Stage stage;
         private Script script;
 
+        private AnimationController animationController;
         ComboBox objectComboBox;
         ComboBox faceComboBox;
         ComboBox modeComboBox;
@@ -32,9 +33,7 @@ namespace PrimerProyecto
         Slider XSlider;
         Slider YSlider;
         Slider ZSlider;
-
         TextBlock fotogramas;
-
         ToggleSwitch TextureSwitch;
 
         private float minRotate = -180f;
@@ -120,9 +119,6 @@ namespace PrimerProyecto
 
             // cuboTrucho.SaveFile("Models/object/cubotrucho.json");
 
-            // stage.Add("cubo", Object3D.LoadFromJson("Models/object/Casa.json"));
-            // stage.Add("techo", Object3D.LoadFromJson("Models/object/Techo.json"));
-            // stage.Add("cono", Object3D.LoadFromJson("Models/object/Cono.json"));
             // stage.Add("cubo Trucho", Object3D.LoadFromJson("Models/object/cubotrucho.json"));
 
 
@@ -147,10 +143,15 @@ namespace PrimerProyecto
             Thread openGL = new(openGLHandler);
             openGL.Start();
 
-
+            animationController = new AnimationController(script);
 #if DEBUG
             this.AttachDevTools();
 #endif
+        }
+
+        private void animationHandler( )
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnClosed(EventArgs e)
@@ -370,7 +371,7 @@ namespace PrimerProyecto
 
         private void playAnimation(object? sender, RoutedEventArgs e)
         {
-            // script.Start();
+            script.Play();
         }
     }
 }
